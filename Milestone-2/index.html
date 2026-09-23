@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible App — AFR53</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Bible</div>
+
+        <div class="selectors">
+            <label>
+                <span>Vertaling</span>
+                <select id="translationSelect"></select>
+            </label>
+
+            <label>
+                <span>Boek</span>
+                <select id="bookSelect"></select>
+            </label>
+
+            <label>
+                <span>Hoofstuk</span>
+                <select id="chapterSelect"></select>
+            </label>
+
+            <label>
+                <span>Vers</span>
+                <select id="verseSelect"></select>
+            </label>
+        </div>
+    </header>
+
+    <main class="reader">
+        <div id="status" class="status">Laai Bybel...</div>
+
+        <section class="chapter-header">
+            <div id="translationName" class="translation-name"></div>
+            <h1 id="chapterTitle">GÉNESIS 1</h1>
+        </section>
+
+        <article id="verseContainer" class="verses"></article>
+
+        <nav class="chapter-nav">
+            <button id="previousButton" type="button">← Vorige</button>
+            <button id="nextButton" type="button">Volgende →</button>
+        </nav>
+    </main>
+
+    <!-- Prototype database engine. We will package this locally later. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
