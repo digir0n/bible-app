@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible App — AFR53</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="brand">Bible</div>
+
+        <div class="location">
+            <span id="locationText">AFR53 · GÉNESIS 1</span>
+        </div>
+
+        <div class="topbar-actions" aria-label="Leesaksies">
+            <button id="searchToggle" class="icon-button" type="button" title="Soek die Bybel" aria-label="Soek die Bybel" aria-expanded="false">🔍</button>
+            <button id="bookmarkManagerToggle" class="icon-button" type="button" title="Wys boekmerke" aria-label="Wys boekmerke" aria-expanded="false">🔖</button>
+            <button id="menuButton" class="menu-button" type="button" aria-expanded="false" title="Navigasie" aria-label="Navigasie">
+                ☰
+            </button>
+        </div>
+    </div>
+
+    <div id="navigationPanel" class="navigation-panel">
+        <section class="nav-section">
+            <div class="nav-label">Vertaling</div>
+            <select id="translationSelect"></select>
+        </section>
+
+        <section class="nav-section">
+            <div class="nav-label">Boek</div>
+            <div class="book-groups">
+                <div>
+                    <h2>Ou Testament</h2>
+                    <div id="oldTestamentBooks" class="book-grid"></div>
+                </div>
+                <div>
+                    <h2>Nuwe Testament</h2>
+                    <div id="newTestamentBooks" class="book-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="nav-section">
+            <div class="nav-label">Hoofstuk</div>
+            <div id="chapterGrid" class="number-grid"></div>
+        </section>
+
+        <section class="nav-section">
+            <div class="nav-label">Vers</div>
+            <div id="verseGrid" class="number-grid verse-grid"></div>
+        </section>
+    </div>
+</header>
+
+<main class="reader">
+    <div id="status" class="status">Laai Bybel...</div>
+
+    <section id="searchPanel" class="search-panel" aria-label="Bybel soek" hidden>
+        <form id="searchForm" class="search-form">
+            <label class="search-label" for="searchInput">Soek die Bybel</label>
+            <div class="search-row">
+                <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Tik 'n woord of frase..."
+                    autocomplete="off"
+                    enterkeyhint="search"
+                >
+                <button id="searchButton" type="submit">Soek</button>
+                <button id="searchClear" type="button" title="Maak soektog skoon">✕</button>
+            </div>
+
+            <div class="search-history-row">
+                <label for="searchHistory">Onlangse soektogte</label>
+                <select id="searchHistory">
+                    <option value="">—</option>
+                </select>
+            </div>
+
+            <div class="search-options">
+                <label>
+                    <span>Soektipe</span>
+                    <select id="searchMode">
+                        <option value="phrase">Frase</option>
+                        <option value="allWords">Alle woorde</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Omvang</span>
+                    <select id="searchScope">
+                        <option value="all">Hele Bybel</option>
+                        <option value="currentBook">Huidige boek</option>
+                    </select>
+                </label>
+            </div>
+        </form>
+
+        <div id="searchStatus" class="search-status"></div>
+        <div id="searchResults" class="search-results"></div>
+    </section>
+
+
+    
+    
+    <section id="noteEditor" class="note-editor" hidden aria-label="Persoonlike nota">
+        <div class="note-editor-header">
+            <h2 id="noteTitle">Nota</h2>
+            <button id="noteClose" type="button" aria-label="Maak nota toe">✕</button>
+        </div>
+
+        <textarea
+            id="noteText"
+            rows="5"
+            placeholder="Tik jou persoonlike nota hier..."
+        ></textarea>
+
+        <div class="note-editor-actions">
+            <button id="noteSave" type="button">Stoor</button>
+            <button id="noteDelete" type="button">Verwyder</button>
+            <button id="noteCancel" type="button">Kanselleer</button>
+        </div>
+    </section>
+
+
+    <section id="notesManager" class="notes-manager" aria-label="Notas" hidden>
+        <div class="notes-manager-header">
+            <h2>Notas</h2>
+            <button id="notesManagerToggle" type="button" aria-expanded="false">Wys</button>
+        </div>
+        <div id="notesManagerBody" hidden>
+            <div class="notes-manager-tools">
+                <input id="notesSearch" type="search" placeholder="Soek notas..." autocomplete="off">
+                <button id="notesSearchClear" type="button">Maak skoon</button>
+            </div>
+            <div id="notesList" class="notes-list"></div>
+            <p id="notesEmpty" class="notes-empty" hidden>Geen notas gevind nie.</p>
+        </div>
+    </section>
+
+<section id="bookmarkPanel" class="bookmark-panel" aria-label="Boekmerke" hidden>
+        <div class="bookmark-header">
+            <h2>Boekmerke</h2>
+            <button
+                id="bookmarkPanelToggle"
+                type="button"
+                aria-expanded="false"
+            >Wys</button>
+        </div>
+
+        <div id="bookmarkList" class="bookmark-list" hidden></div>
+        <div id="bookmarkEmpty" class="bookmark-empty" hidden>
+            Geen boekmerke gestoor nie.
+        </div>
+    </section>
+
+<section class="chapter-header">
+        <div id="translationName" class="translation-name"></div>
+        <h1 id="chapterTitle">GÉNESIS 1</h1>
+    </section>
+
+    <div class="reading-controls" aria-label="Leesinstellings">
+        <button id="noteToggle" type="button" title="Nota vir huidige vers" aria-label="Nota vir huidige vers">📝</button>
+        <button id="bookmarkToggle" type="button" title="Boekmerk huidige vers" aria-label="Boekmerk huidige vers">☆</button>
+        <button id="themeToggle" type="button" title="Donker tema" aria-label="Skakel donker tema">☾</button>
+        <button id="fontDown" type="button" title="Kleiner teks">A−</button>
+        <button id="fontReset" type="button" title="Normale teks">A</button>
+        <button id="fontUp" type="button" title="Groter teks">A+</button>
+    </div>
+
+    <article id="verseContainer" class="verses"></article>
+
+    <nav class="chapter-nav">
+        <button id="previousButton" type="button">← Vorige</button>
+        <button id="nextButton" type="button">Volgende →</button>
+    </nav>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-asm.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
