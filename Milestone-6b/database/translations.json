@@ -1,0 +1,11 @@
+{
+  "default": "AFR53",
+  "translations": [
+    {
+      "id": "AFR53",
+      "name": "Afrikaans 1933/1953",
+      "language": "af",
+      "file": "afr53.sqlite3"
+    }
+  ]
+}
